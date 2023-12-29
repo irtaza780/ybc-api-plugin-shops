@@ -1,5 +1,11 @@
 import SimpleSchema from "simpl-schema";
-import { Email, ParcelSize, ShopAddress, ShopLogoUrls, StorefrontUrls } from "../simpleSchemas.js";
+import {
+  Email,
+  ParcelSize,
+  ShopAddress,
+  ShopLogoUrls,
+  StorefrontUrls,
+} from "../simpleSchemas.js";
 
 const ImageSizes = new SimpleSchema({
   large: {
@@ -162,7 +168,11 @@ export default async function updateShop(context, input) {
 
   // Check permission to make sure user is allowed to do this
   // Security check for admin access
-  await context.validatePermissions(`reaction:legacy:shops:${shopId}`, "update", { shopId });
+  await context.validatePermissions(
+    `reaction:legacy:shops:${shopId}`,
+    "update",
+    { shopId }
+  );
 
   // set data to update
   const sets = {};
@@ -170,7 +180,8 @@ export default async function updateShop(context, input) {
   Object.keys(shopSettings).forEach((setting) => {
     // Boolean and number settings
     if (
-      (typeof shopSettings[setting] === "boolean" || typeof shopSettings[setting] === "number") &&
+      (typeof shopSettings[setting] === "boolean" ||
+        typeof shopSettings[setting] === "number") &&
       !complexSettings.includes(setting)
     ) {
       sets[setting] = shopSettings[setting];

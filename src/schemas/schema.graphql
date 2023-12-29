@@ -133,7 +133,7 @@ type Shop implements Node {
   unitsOfMeasure: [UnitOfMeasure]
 
   "categories of products that are offered"
-  categories: [String]
+  categories: [ProductCategory]
 
   "pickup services check"
   isPickup: Boolean
